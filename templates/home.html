@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+
+    <div id="global-error" class="alert alert-danger alert-dismissible hidden" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        Oh snap! Something went wrong.
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1>Pokemon list</h1>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>name</th>
+                            <th>longitude</th>
+                            <th>latitude</th>
+                            <th>author</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="pokemon-list">
+                        <!-- pokemon list goes here -->   
+                    </tbody>
+                </table>
+            </div>
+        </div>  
+        <div class="col-md-4">
+
+
+            <form method="POST" role="form" id="pokemon-add-form">
+                {% csrf_token %}
+                <legend>Add Pokemon</legend>
+
+                <div class="alert alert-danger hidden" role="alert">
+                    Oh snap! Change a few things up and try submitting again.
+                </div>
+            
+                <div class="form-group">
+                    <label for="">name</label>
+                    <input name="name" type="text" class="form-control" placeholder="Pokemon Name">
+                </div>
+
+                <div class="form-group">
+                    <label for="">latitude</label>
+                    <input type="text" class="form-control"   name="latitude">
+                </div>
+
+                <div class="form-group">
+                    <label for="">longitude</label>
+                    <input type="text" class="form-control"  name="longitude">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modal-id">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Edit Pokemon</h4>
+                </div>
+                <div class="modal-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% csrf_token %}
+
+{% endblock %}
+
+{% block css %}
+<style type="text/css" media="screen">
+    .glyphicon { padding: 0px 10px; }
+</style>
+{% endblock %}
+
+{% block extra_scripts %}
+    <script src="{% static 'scripts/pokemon.service.js' %}" type="text/javascript"></script>
+    <script src="{% static 'scripts/main.js' %}" type="text/javascript"></script>
+{% endblock %}

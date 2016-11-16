@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<span class="error"></span>
+<form id="loginForm">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="button" id="login-btn">Login</button>
+</form>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+$(function () {
+    $('#login-btn').on('click', function () {
+        $.post("{% url 'api_login' %}", $('#loginForm').serialize())
+            .done(function (response) {
+                window.location.href="{% url 'home' %}";
+            })
+            .fail(function (response) {
+                $('.error').text(response.responseText);
+            });
+    });
+});
+</script>
+{% endblock %}

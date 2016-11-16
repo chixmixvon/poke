@@ -1,0 +1,54 @@
+<div class="container">
+    <h1>hello {{ ::ctrl.name }}</h1>
+
+    <dr-von name="kevin"></dr-von>
+    <span dr-von name="dudz"></span>
+    <p class="dr-von" name="resty"></p>
+
+    <div class="col-md-6">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Long</th>
+                    <th>Lat</th>
+                </tr>
+            </thead>
+            <ul>
+                <li ng-repeat="x in pokemons">
+                    <dr-pokemon info="x"></dr-pokemon>
+                </li>
+            </ul>
+        </table>
+    </div>   
+
+    <div class="col-md-6">
+
+        <form ng-submit="isEdit ? updatePokemon(form) : createPokemon(form)">
+            <legend>{{ isEdit ? 'Update': 'Create' }} Pokemon</legend>
+            
+            <div class="form-group">
+                <label for="">Name</label>
+                <input type="text" class="form-control" ng-model="form.name">
+            </div>
+        
+            <div class="form-group">
+                <label for="">latitude</label>
+                <input type="text" class="form-control" ng-model="form.latitude">
+            </div>
+
+            <div class="form-group">
+                <label for="">Long</label>
+                <input type="text" class="form-control" ng-model="form.longitude">
+            </div>        
+        
+            <button type="submit" ng-show="isEdit" class="btn btn-primary">Update</button>
+            <button type="submit" ng-hide="isEdit" class="btn btn-primary">Submit</button>
+            <button type="submit" ng-show="isEdit" ng-click="isEdit = false" class="btn">Cancel</button>
+
+        </form>
+
+    </div>
+
+</div>
